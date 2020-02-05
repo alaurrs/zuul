@@ -8,11 +8,28 @@ public class Game
     {
         //Initialisation des pièces
         Room vOutside=new Room("in the street, outside the gym");
-        Room vGym=new Room("in a lecture theatre");
+        Room vGrocery=new Room("in the grocery");
+        Room vHome=new Room("at home");
+        Room vGym1=new Room("in the first floor of the gym");
+        Room vLockers=new Room("in the lockers of the gym");
+        Room vGym0=new Room("in the basement of the gym");
         Room vRestaurant=new Room("in the Restaurant");
+        Room vToilets=new Room("in the toilets of the restaurant");
         //Sorties
-        vOutside.setExits("south",vGym);
+        vOutside.setExits("south",vGym1);
         vOutside.setExits("north",vRestaurant);
+        vOutside.setExits("east",vHome);
+        vOutside.setExits("west",vGrocery);
+        vGrocery.setExits("east",vOutside);
+        vHome.setExits("west",vOutside);
+        vGym1.setExits("down",vGym0);
+        vGym1.setExits("north",vOutside);
+        vGym1.setExits("east",vLockers);
+        vLockers.setExits("west",vGym1);
+        vGym0.setExits("up",vGym1);
+        vRestaurant.setExits("south",vOutside);
+        vRestaurant.setExits("down",vToilets);
+        vToilets.setExits("up",vRestaurant);
         //Lieu courant
         this.aCurrentRoom=vOutside;
     }
@@ -63,8 +80,8 @@ public class Game
     
     private void printWelcome() 
     {
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("Welcome to Bodybuilding Adventure ! ");
+        System.out.println("Bodybuilding is a new, incredible game.");
         System.out.println("Type 'help' if you need help.");
         this.printLocationInfo();
     }
@@ -73,7 +90,7 @@ public class Game
     private void printHelp()
     {
         System.out.println("You are lost. You are alone.");
-        System.out.println("You wander around at the university.");
+        System.out.println("You wander in the street");
         System.out.println("Your command words are: ");
         System.out.println(CommandWords.getStringValidCommands());
         
